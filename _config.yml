@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://arendjantetteroo.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: AJ Technologies
+subtitle: Developing for the (green) Web
+author: Arend-Jan Tetteroo
 simple_search: http://google.com/search
 description:
 
@@ -63,13 +63,13 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: arendjantetteroo
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: ajtetteroo
 twitter_tweet_button: true
 
 # Google +1
@@ -90,11 +90,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: ajtechnologies
+disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-20088592-3
 
 # Facebook Like
 facebook_like: false
