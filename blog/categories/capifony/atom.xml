@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Capifony | AJ Technologies]]></title>
+  <link href="http://arendjantetteroo.github.io/blog/categories/capifony/atom.xml" rel="self"/>
+  <link href="http://arendjantetteroo.github.io/"/>
+  <updated>2013-06-14T22:16:26+02:00</updated>
+  <id>http://arendjantetteroo.github.io/</id>
+  <author>
+    <name><![CDATA[Arend-Jan Tetteroo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying a Symfony2 app with Capifony and Bower]]></title>
+    <link href="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/"/>
+    <updated>2013-06-14T18:21:00+02:00</updated>
+    <id>http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower</id>
+    <content type="html"><![CDATA[<p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
+
+<p>In this app I&rsquo;m using the <a href="https://github.com/Spea/SpBowerBundle">SPBowerBundle</a> to use the <a href="https://github.com/bower/bower">bower</a> package manager for all the 3rd party frontend code, like <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, <a href="http://jquery.org">Jquery</a> and <a href="http://www.jqplot.com">Jqplot</a>.</p>
+
+<p><a href="http://capifony.org">Capifony</a> normally works great for deploying (if you&rsquo;re not using it, you should check it out!), but this time it didn&rsquo;t.</p>
+
+<p>The <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md">setup of the SPBowerBundle</a> is very straightforward, but if you want to deploy it with capifony you need to setup a few things that aren&rsquo;t really obvious.</p>
+
+<ol>
+<li>As Capifony by default does <a href="http://capifony.org/cookbook/composer-vendors.html">not run the scripts</a> included by Composer, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-6-add-composer-scripts-for-automatic-update-of-dependencies">step 6 of the SPBowerBundle</a> of the installation manual doesn&rsquo;t work.
+Instead you need to add the following to your deploy.rb:
+``` ruby /app/config/deploy.rb
+before &lsquo;symfony:cache:warmup&rsquo;, &lsquo;symfony:sp:bower:install&rsquo;</li>
+</ol>
+
+
+<p>namespace :symfony do
+  namespace :sp do</p>
+
+<pre><code>namespace :bower do
+    desc '[internal] Run the bower install'
+    task :install do
+        invoke_command "cd #{latest_release} &amp;&amp; app/console sp:bower:install --env=prod", :via =&gt; run_method
+    end
+end
+</code></pre>
+
+<p>  end
+end
+```
+Before the cache is warmed up, the SPBowerBundle installs the specified assets, so they are available for the specified assetic filters.</p>
+
+<ol>
+<li>Make sure you setup the cache warmup of the SPBowerBundle, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-7-installing-dependencies-on-every-cache-warmup">step 7</a>
+``` yml app/config/config.yml
+
+<h1>app/config/config.yml</h1>
+
+<p>sp_bower:
+ install_on_warmup: true
+```  <br/>
+as otherwise you get the following error:</p></li>
+</ol>
+
+
+<p><code>php
+ [Sp\BowerBundle\Bower\Exception\MappingException]
+Bower returned an invalid dependency mapping. This mostly happens when the dependencies are not yet installed or if you are using an old version of bower.
+</code></p>
+
+<p>If you did that, and you still get the above mentioned exception, copy your components.json to your server and try a bower install on it. If that works, it&rsquo;s a configuration issue in capifony, if not, then you should check your bower install.</p>
+]]></content>
+  </entry>
+  
+</feed>

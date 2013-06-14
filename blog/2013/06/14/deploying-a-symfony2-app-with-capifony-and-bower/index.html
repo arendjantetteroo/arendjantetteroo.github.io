@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>AJ Technologies</title>
+  <title>Deploying a Symfony2 app with Capifony and Bower - AJ Technologies</title>
   <meta name="author" content="Arend-Jan Tetteroo">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arendjantetteroo.github.io">
+  <link rel="canonical" href="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="AJ Technologies" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a Symfony2 App With Capifony and Bower</a></h1>
+      <h1 class="entry-title">Deploying a Symfony2 App With Capifony and Bower</h1>
     
     
       <p class="meta">
@@ -89,14 +86,14 @@
 
 <time datetime="2013-06-14T18:21:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
+<div class="entry-content"><p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
 
 <p>In this app I&rsquo;m using the <a href="https://github.com/Spea/SpBowerBundle">SPBowerBundle</a> to use the <a href="https://github.com/bower/bower">bower</a> package manager for all the 3rd party frontend code, like <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, <a href="http://jquery.org">Jquery</a> and <a href="http://www.jqplot.com">Jqplot</a>.</p>
 
@@ -165,18 +162,63 @@ as otherwise you get the following error:</p>
 
 <p>If you did that, and you still get the above mentioned exception, copy your components.json to your server and try a bower install on it. If that works, it&rsquo;s a configuration issue in capifony, if not, then you should check your bower install.</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Arend-Jan Tetteroo</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-06-14T18:21:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/bower/'>Bower</a>, <a class='category' href='/blog/categories/capifony/'>Capifony</a>, <a class='category' href='/blog/categories/spbowerbundle/'>SPBowerBundle</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/" data-via="ajtetteroo" data-counturl="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -193,7 +235,7 @@ as otherwise you get the following error:</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/arendjantetteroo">@arendjantetteroo</a> on GitHub
@@ -226,6 +268,7 @@ as otherwise you get the following error:</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -240,7 +283,10 @@ as otherwise you get the following error:</p>
       var disqus_shortname = 'ajtechnologies';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/';
+        var disqus_url = 'http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
