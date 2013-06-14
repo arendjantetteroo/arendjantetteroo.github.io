@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bower | AJ Technologies]]></title>
   <link href="http://arendjantetteroo.github.io/blog/categories/bower/atom.xml" rel="self"/>
   <link href="http://arendjantetteroo.github.io/"/>
-  <updated>2013-06-14T22:16:26+02:00</updated>
+  <updated>2013-06-14T22:44:57+02:00</updated>
   <id>http://arendjantetteroo.github.io/</id>
   <author>
     <name><![CDATA[Arend-Jan Tetteroo]]></name>
@@ -22,17 +22,14 @@
 
 <p>In this app I&rsquo;m using the <a href="https://github.com/Spea/SpBowerBundle">SPBowerBundle</a> to use the <a href="https://github.com/bower/bower">bower</a> package manager for all the 3rd party frontend code, like <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, <a href="http://jquery.org">Jquery</a> and <a href="http://www.jqplot.com">Jqplot</a>.</p>
 
-<p><a href="http://capifony.org">Capifony</a> normally works great for deploying (if you&rsquo;re not using it, you should check it out!), but this time it didn&rsquo;t.</p>
+<p><a href="http://capifony.org">Capifony</a> normally works great for deploying symfony2 apps (if you&rsquo;re not using it, you should check it out!), but this time it didn&rsquo;t.</p>
 
 <p>The <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md">setup of the SPBowerBundle</a> is very straightforward, but if you want to deploy it with capifony you need to setup a few things that aren&rsquo;t really obvious.</p>
 
-<ol>
-<li>As Capifony by default does <a href="http://capifony.org/cookbook/composer-vendors.html">not run the scripts</a> included by Composer, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-6-add-composer-scripts-for-automatic-update-of-dependencies">step 6 of the SPBowerBundle</a> of the installation manual doesn&rsquo;t work.
+<p>1) As Capifony by default does <a href="http://capifony.org/cookbook/composer-vendors.html">not run the scripts</a> included by Composer, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-6-add-composer-scripts-for-automatic-update-of-dependencies">step 6 of the SPBowerBundle</a> of the installation manual doesn&rsquo;t work.
 Instead you need to add the following to your deploy.rb:
 ``` ruby /app/config/deploy.rb
-before &lsquo;symfony:cache:warmup&rsquo;, &lsquo;symfony:sp:bower:install&rsquo;</li>
-</ol>
-
+before &lsquo;symfony:cache:warmup&rsquo;, &lsquo;symfony:sp:bower:install&rsquo;</p>
 
 <p>namespace :symfony do
   namespace :sp do</p>
@@ -50,18 +47,18 @@ end
 ```
 Before the cache is warmed up, the SPBowerBundle installs the specified assets, so they are available for the specified assetic filters.</p>
 
-<ol>
-<li>Make sure you setup the cache warmup of the SPBowerBundle, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-7-installing-dependencies-on-every-cache-warmup">step 7</a>
-``` yml app/config/config.yml
+<p>2) Make sure you setup the cache warmup of the SPBowerBundle, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-7-installing-dependencies-on-every-cache-warmup">step 7</a>
+``` yml app/config/config.yml</p>
 
 <h1>app/config/config.yml</h1>
 
-<p>sp_bower:
- install_on_warmup: true
-```  <br/>
-as otherwise you get the following error:</p></li>
-</ol>
+<p>sp_bower:</p>
 
+<pre><code>install_on_warmup: true
+</code></pre>
+
+<p>```  <br/>
+as otherwise you get the following error:</p>
 
 <p><code>php
  [Sp\BowerBundle\Bower\Exception\MappingException]
