@@ -9,7 +9,7 @@
   <meta name="author" content="Arend-Jan Tetteroo">
 
   
-  <meta name="description" content="Today I wanted to deploy a new Symfony2 app I&rsquo;m working on. In this app I&rsquo;m using the SPBowerBundle to use the bower package manager for &hellip;">
+  <meta name="description" content="Last time I talked about Deploying a symfony2 app with capifony and bower. Working with this setup for a few months I found a few problems: Deploys &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,252 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/06/switching-from-bower-to-composer-with-components/">Switching From Bower to Composer With Components</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-06T09:34:00+01:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/06/switching-from-bower-to-composer-with-components/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last time I talked about <a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a symfony2 app with capifony and bower</a>.</p>
+
+<p>Working with this setup for a few months I found a few problems:</p>
+
+<ul>
+<li>Deploys get a lot slower</li>
+<li>Strange errors with cache clear and cache warmup</li>
+</ul>
+
+
+<p>Looking for a better solution I found out most of my dependencies were already on packagist, so I could just include them in my composer.json</p>
+
+<figure class='code'><figcaption><span>/composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;components/jquery&quot;</span><span class="p">:</span> <span class="s2">&quot;1.10.*&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now while running composer.phar install you&rsquo;ll get the following output:</p>
+
+<figure class='code'><figcaption><span>php composer.phar install</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Loading composer repositories with package information
+</span><span class='line'>Installing dependencies <span class="o">(</span>including require-dev<span class="o">)</span>
+</span><span class='line'>  - Installing symfony/process <span class="o">(</span>v2.3.6<span class="o">)</span>
+</span><span class='line'>    Loading from cache
+</span><span class='line'>
+</span><span class='line'>  - Installing kriswallsmith/assetic <span class="o">(</span>v1.1.2<span class="o">)</span>
+</span><span class='line'>    Loading from cache
+</span><span class='line'>
+</span><span class='line'>  - Installing robloach/component-installer <span class="o">(</span>0.0.12<span class="o">)</span>
+</span><span class='line'>    Loading from cache
+</span><span class='line'>
+</span><span class='line'>  - Installing components/jquery <span class="o">(</span>1.10.2<span class="o">)</span>
+</span><span class='line'>    Loading from cache
+</span><span class='line'>
+</span><span class='line'>kriswallsmith/assetic suggests installing twig/twig <span class="o">(</span>Assetic provides the integration with the Twig templating engine<span class="o">)</span>
+</span><span class='line'>kriswallsmith/assetic suggests installing leafo/lessphp <span class="o">(</span>Assetic provides the integration with the lessphp LESS compiler<span class="o">)</span>
+</span><span class='line'>kriswallsmith/assetic suggests installing leafo/scssphp <span class="o">(</span>Assetic provides the integration with the scssphp SCSS compiler<span class="o">)</span>
+</span><span class='line'>kriswallsmith/assetic suggests installing ptachoire/cssembed <span class="o">(</span>Assetic provides the integration with phpcssembed to embed data uris<span class="o">)</span>
+</span><span class='line'>kriswallsmith/assetic suggests installing leafo/scssphp-compass <span class="o">(</span>Assetic provides the integration with the SCSS compass plugin<span class="o">)</span>
+</span><span class='line'>Writing lock file
+</span><span class='line'>Generating autoload files
+</span><span class='line'>Compiling component files
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Composer uses the <a href="https://github.com/RobLoach/component-installer">robloach/component-installer</a> to install the components in /vendor/components along with assetic and symfony process which it uses to generate a require.js file you can directly use in your project. This require.js (and require.css) can be found in /components/require.js</p>
+
+<p>If you&rsquo;re using Symfony2 and want to use assetic instead of the require.js file, you can configure that in your config.yml like so:</p>
+
+<figure class='code'><figcaption><span>/app/config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Assetic Configuration</span>
+</span><span class='line'><span class="l-Scalar-Plain">assetic</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">...</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">assets</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">jquery_js</span><span class="p-Indicator">:</span>
+</span><span class='line'>                    <span class="l-Scalar-Plain">inputs</span><span class="p-Indicator">:</span>
+</span><span class='line'>                        <span class="p-Indicator">-</span> <span class="err">%</span><span class="l-Scalar-Plain">kernel.root_dir%/../web/components/jquery/jquery.js</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage is then just using this asset in your template files:</p>
+
+<figure class='code'><figcaption><span>/app/Resources/views/base.html.twig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% javascripts
+</span><span class='line'>            &quot;@jquery_js&quot;
+</span><span class='line'>            output=&#39;compiled/main.js&#39;
+</span><span class='line'>%}
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;{{ asset_url }}&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>{% endjavascripts %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Ok, so what packages are available on packagist?</h2>
+
+<p>Just fill in components on <a href="https://packagist.org/search/?q=components">packagist</a> which already has 44 pages. Ok, so not all of those are real components, there are some other php packages as well, but most popular libs are already available this way.</p>
+
+<h2>I need component X and it&rsquo;s not on packagist, what to do?</h2>
+
+<p>Just add your own repository to composer.json and figure out which specific files you need in your project.
+The following is an example with jqplot</p>
+
+<figure class='code'><figcaption><span>/composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;repositories&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;package&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;package&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;components/jqplot&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;component&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.8&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nt">&quot;dist&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.8r1250.zip&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;zip&quot;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="nt">&quot;extra&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nt">&quot;component&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>                            <span class="s2">&quot;excanvas.js&quot;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="s2">&quot;jquery.jqplot.js&quot;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="s2">&quot;plugins/*.js&quot;</span>
+</span><span class='line'>                        <span class="p">],</span>
+</span><span class='line'>                        <span class="nt">&quot;styles&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>                            <span class="s2">&quot;jquery.jqplot.css&quot;</span>
+</span><span class='line'>                        <span class="p">]</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nt">&quot;robloach/component-installer&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;components/jqplot&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.8&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>L6: Add a name for the package, which you use later on in the require</li>
+<li>L9 Add a repository with a dist to a zipfile (jqplot is on bitbucket but works as well for github or normal http urls)</li>
+<li>l7 specify type: &lsquo;component&rsquo;</li>
+<li>L25 require the robloach/component-installer so it is handled by the component installer by composer</li>
+<li><p>L32 require your package with the name you&rsquo;ve given in L6 and the version in L8</p></li>
+<li><p>Lines 13 till 24 are important as they define which files will be copied to the /components/jqplot directory from the /vendords/components/jqplot directory. In this case we&rsquo;ll need excanvas, the jquery.jqplot.js file and all plugins. And we include the jquery.jqplot.css style as well.</p></li>
+</ul>
+
+
+<p> Check out the documentation on <a href="https://github.com/RobLoach/component-installer#packages-without-composer-support">robloach/component-installer</a> for more information.</p>
+
+<h2>Conclusion</h2>
+
+<p>As most js and css packages are on packagist anyway and composer is really good integrated into capifony, this solution works a lot better than depending on bower. Adding a package not on packagist is a bit more work, but not that difficult. Try it out yourself!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -188,6 +434,10 @@ as otherwise you get the following error:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/06/switching-from-bower-to-composer-with-components/">Switching From Bower to Composer With Components</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a Symfony2 App With Capifony and Bower</a>

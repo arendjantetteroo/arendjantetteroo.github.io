@@ -1,24 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[AJ Technologies]]></title>
-  <link href="http://arendjantetteroo.github.io/atom.xml" rel="self"/>
-  <link href="http://arendjantetteroo.github.io/"/>
-  <updated>2013-11-06T14:43:54+01:00</updated>
-  <id>http://arendjantetteroo.github.io/</id>
-  <author>
-    <name><![CDATA[Arend-Jan Tetteroo]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Switching from Bower to composer with components - AJ Technologies</title>
+  <meta name="author" content="Arend-Jan Tetteroo">
 
   
-  <entry>
-    <title type="html"><![CDATA[Switching from Bower to composer with components]]></title>
-    <link href="http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/"/>
-    <updated>2013-11-06T09:34:00+01:00</updated>
-    <id>http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components</id>
-    <content type="html"><![CDATA[<p>Last time I talked about <a href="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a symfony2 app with capifony and bower</a>.</p>
+  <meta name="description" content="Last time I talked about Deploying a symfony2 app with capifony and bower. Working with this setup for a few months I found a few problems: Deploys &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="AJ Technologies" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-20088592-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">AJ Technologies</a></h1>
+  
+    <h2>Developing for the (green) Web</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:arendjantetteroo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Switching From Bower to Composer With Components</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-06T09:34:00+01:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last time I talked about <a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a symfony2 app with capifony and bower</a>.</p>
 
 <p>Working with this setup for a few months I found a few problems:</p>
 
@@ -227,77 +314,156 @@ The following is an example with jqplot</p>
 <h2>Conclusion</h2>
 
 <p>As most js and css packages are on packagist anyway and composer is really good integrated into capifony, this solution works a lot better than depending on bower. Adding a package not on packagist is a bit more work, but not that difficult. Try it out yourself!</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Deploying a Symfony2 app with Capifony and Bower]]></title>
-    <link href="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/"/>
-    <updated>2013-06-14T18:21:00+02:00</updated>
-    <id>http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower</id>
-    <content type="html"><![CDATA[<p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
 
-<p>In this app I&rsquo;m using the <a href="https://github.com/Spea/SpBowerBundle">SPBowerBundle</a> to use the <a href="https://github.com/bower/bower">bower</a> package manager for all the 3rd party frontend code, like <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, <a href="http://jquery.org">Jquery</a> and <a href="http://www.jqplot.com">Jqplot</a>.</p>
+<span class="byline author vcard">Posted by <span class="fn">Arend-Jan Tetteroo</span></span>
 
-<p><a href="http://capifony.org">Capifony</a> normally works great for deploying symfony2 apps (if you&rsquo;re not using it, you should check it out!), but this time it didn&rsquo;t.</p>
-
-<p>The <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md">setup of the SPBowerBundle</a> is very straightforward, but if you want to deploy it with capifony you need to setup a few things that aren&rsquo;t really obvious.</p>
-
-<p>1) As Capifony by default does <a href="http://capifony.org/cookbook/composer-vendors.html">not run the scripts</a> included by Composer, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-6-add-composer-scripts-for-automatic-update-of-dependencies">step 6 of the SPBowerBundle</a> of the installation manual doesn&rsquo;t work.
-Instead you need to add the following to your deploy.rb:</p>
-
-<figure class='code'><figcaption><span>/app/config/deploy.rb </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before</span> <span class="s1">&#39;symfony:cache:warmup&#39;</span><span class="p">,</span> <span class="s1">&#39;symfony:sp:bower:install&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">namespace</span> <span class="ss">:symfony</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">namespace</span> <span class="ss">:sp</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">namespace</span> <span class="ss">:bower</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">desc</span> <span class="s1">&#39;[internal] Run the bower install&#39;</span>
-</span><span class='line'>      <span class="n">task</span> <span class="ss">:install</span> <span class="k">do</span>
-</span><span class='line'>          <span class="n">invoke_command</span> <span class="s2">&quot;cd </span><span class="si">#{</span><span class="n">latest_release</span><span class="si">}</span><span class="s2"> &amp;&amp; app/console sp:bower:install --env=prod&quot;</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="n">run_method</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+      
 
 
-<p>Before the cache is warmed up, the SPBowerBundle installs the specified assets, so they are available for the specified assetic filters.</p>
-
-<p>2) Make sure you setup the cache warmup of the SPBowerBundle, <a href="https://github.com/Spea/SpBowerBundle/blob/master/Resources/doc/index.md#step-7-installing-dependencies-on-every-cache-warmup">step 7</a></p>
-
-<figure class='code'><figcaption><span>app/config/config.yml </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># app/config/config.yml</span>
-</span><span class='line'><span class="l-Scalar-Plain">sp_bower</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">install_on_warmup</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>  <br/>
-as otherwise you get the following error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x"> [Sp\BowerBundle\Bower\Exception\MappingException]</span>
-</span><span class='line'><span class="x">Bower returned an invalid dependency mapping. This mostly happens when the dependencies are not yet installed or if you are using an old version of bower.</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you did that, and you still get the above mentioned exception, copy your components.json to your server and try a bower install on it. If that works, it&rsquo;s a configuration issue in capifony, if not, then you should check your bower install.</p>
-]]></content>
-  </entry>
+
+
   
-</feed>
+
+
+<time datetime="2013-11-06T09:34:00+01:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/" data-via="ajtetteroo" data-counturl="http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/" title="Previous Post: Deploying a Symfony2 app with Capifony and Bower">&laquo; Deploying a Symfony2 app with Capifony and Bower</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/06/switching-from-bower-to-composer-with-components/">Switching From Bower to Composer With Components</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/">Deploying a Symfony2 App With Capifony and Bower</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/arendjantetteroo">@arendjantetteroo</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'arendjantetteroo',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Arend-Jan Tetteroo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ajtechnologies';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/';
+        var disqus_url = 'http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
