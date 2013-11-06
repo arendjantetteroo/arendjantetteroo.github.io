@@ -6,6 +6,11 @@ comments: true
 categories: [Symfony2, Bower, SPBowerBundle, Capifony]
 ---
 
+UPDATE: See [Switching from bower to composer with components](/blog/2013/11/06/switching-from-bower-to-composer-with-components/) for a better solution.
+
+<hr>
+
+
 Today I wanted to deploy a new Symfony2 app I'm working on. 
 
 In this app I'm using the [SPBowerBundle](https://github.com/Spea/SpBowerBundle) to use the [bower](https://github.com/bower/bower) package manager for all the 3rd party frontend code, like [Twitter Bootstrap](http://twitter.github.io/bootstrap/), [Jquery](http://jquery.org) and [Jqplot](http://www.jqplot.com). 

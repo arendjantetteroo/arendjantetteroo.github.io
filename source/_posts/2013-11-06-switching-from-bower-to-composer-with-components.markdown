@@ -12,6 +12,7 @@ Working with this setup for a few months I found a few problems:
 
  * Deploys get a lot slower
  * Strange errors with cache clear and cache warmup
+ * Why not use composer as we already use it for other dependencies
  
 Looking for a better solution I found out most of my dependencies were already on packagist, so I could just include them in my composer.json
 
