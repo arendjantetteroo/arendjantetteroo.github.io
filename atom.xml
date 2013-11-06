@@ -4,7 +4,7 @@
   <title><![CDATA[AJ Technologies]]></title>
   <link href="http://arendjantetteroo.github.io/atom.xml" rel="self"/>
   <link href="http://arendjantetteroo.github.io/"/>
-  <updated>2013-11-06T14:43:54+01:00</updated>
+  <updated>2013-11-06T14:54:00+01:00</updated>
   <id>http://arendjantetteroo.github.io/</id>
   <author>
     <name><![CDATA[Arend-Jan Tetteroo]]></name>
@@ -235,7 +235,12 @@ The following is an example with jqplot</p>
     <link href="http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower/"/>
     <updated>2013-06-14T18:21:00+02:00</updated>
     <id>http://arendjantetteroo.github.io/blog/2013/06/14/deploying-a-symfony2-app-with-capifony-and-bower</id>
-    <content type="html"><![CDATA[<p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
+    <content type="html"><![CDATA[<p>UPDATE: See <a href="http://arendjantetteroo.github.io/blog/2013/11/06/switching-from-bower-to-composer-with-components/">Switching from bower to composer with components</a> for a better solution.</p>
+
+<hr>
+
+
+<p>Today I wanted to deploy a new Symfony2 app I&rsquo;m working on.</p>
 
 <p>In this app I&rsquo;m using the <a href="https://github.com/Spea/SpBowerBundle">SPBowerBundle</a> to use the <a href="https://github.com/bower/bower">bower</a> package manager for all the 3rd party frontend code, like <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, <a href="http://jquery.org">Jquery</a> and <a href="http://www.jqplot.com">Jqplot</a>.</p>
 
