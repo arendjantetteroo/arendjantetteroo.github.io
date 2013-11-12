@@ -9,7 +9,7 @@
   <meta name="author" content="Arend-Jan Tetteroo">
 
   
-  <meta name="description" content="Last time I talked about Deploying a symfony2 app with capifony and bower. Working with this setup for a few months I found a few problems: Deploys &hellip;">
+  <meta name="description" content="TL;DR Use the app/console server:run method to start a correct symfony2 server site instead of just using php -S Long version I&rsquo;m working on a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,113 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/12/running-symfony2-on-the-php-5-dot-4-internal-webserver-and-assets-404/">Running Symfony2 on the Php 5.4 Internal Webserver and Assets 404</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-12T08:58:00+01:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/12/running-symfony2-on-the-php-5-dot-4-internal-webserver-and-assets-404/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>TL;DR</h2>
+
+<p>Use the app/console server:run method to start a correct symfony2 server site instead of just using php -S</p>
+
+<h2>Long version</h2>
+
+<p>I&rsquo;m working on a docker container for a client, so the working environment is almost the same as the production environment and doesn&rsquo;t interfere with other projects that use other dependencies. More on <a href="docker.io">Docker</a> in a later post.</p>
+
+<p>Working on this Docker container I tried to get <a href="http://www.symfony.com">Symfony2</a> running with the easiest option, so not configuring apache-modphp or nginx-phpfpm, but just using the <a href="http://www.php.net/manual/en/features.commandline.webserver.php">internal webserver</a> that php offers since 5.4. As this is just a development envirement, this should be fine.</p>
+
+<p>I started with this command, which seemed to work:</p>
+
+<figure class='code'><figcaption><span>/root/of/your/project</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">php -S 0.0.0.0:8000 -t web web/app_dev.php</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, when visiting the site in question on <a href="http://0.0.0.0:8000">http://0.0.0.0:8000</a> all assets error out with a 404.</p>
+
+<p>Not sure what was happening, I debugged it and tried it on other sites where it worked fine.</p>
+
+<p>For Symfony 2 there is a console command you can run to get the webserver running, which adds a small router file to let the internal webserver know where certain files are.</p>
+
+<figure class='code'><figcaption><span>/root/of/your/project</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">php app/console server:run  -vvv 0.0.0.0:8000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The -vvv option defines the verbosity, normally you can skip it, but as I wanted to see what was happening I added it.
+Visiting my site now at <a href="http://0.0.0.0:8000">http://0.0.0.0:8000</a> gave a normal functioning site as I expected.</p>
+
+<h2>So what does the server:run command do?</h2>
+
+<p>The ps fax command shows what is happening when the server:run command is run:</p>
+
+<figure class='code'><figcaption><span>/root/of/your/project</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">#ps fax</span>
+</span><span class='line'><span class="x"> 9 ?        S+     0:00 php app/console server:run -vvv 0.0.0.0:8005</span>
+</span><span class='line'><span class="x">29 ?        S+     0:00  \_ sh -c &#39;/usr/bin/php5&#39; &#39;-S&#39; &#39;0.0.0.0:8005&#39; &#39;/server/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_dev.php&#39;</span>
+</span><span class='line'><span class="x">30 ?        S+     0:05      \_ /usr/bin/php5 -S 0.0.0.0:8005 /server/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_dev.php</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The server:run command starts a php webserver with a special router_dev.php file, that looks like this:</p>
+
+<figure class='code'><figcaption><span>/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_dev.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">if (is_file($_SERVER[&#39;DOCUMENT_ROOT&#39;].DIRECTORY_SEPARATOR.$_SERVER[&#39;SCRIPT_NAME&#39;])) {</span>
+</span><span class='line'><span class="x">    return false;</span>
+</span><span class='line'><span class="x">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">$_SERVER[&#39;SCRIPT_FILENAME&#39;] = $_SERVER[&#39;DOCUMENT_ROOT&#39;].DIRECTORY_SEPARATOR.&#39;app_dev.php&#39;;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">require &#39;app_dev.php&#39;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So basically what happens is that a check is done on the filesystem to see if the file exists. If so, a false is returned to the webserver so it knows that it needs to deliver it directly to the browser instead of forwarding the request to the app_dev.php file into our symfony2 application.</p>
+
+<p>Hope this helps someone avoid a couple of hours searching for why it doesn&rsquo;t work.</p>
+
+<p>Next post will be a dockerfile for the symfony2 standard edition so you can easily code away on a new project without needing some hours to set it up with docker.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -439,8 +546,16 @@ as otherwise you get the following error:</p>
 <aside class="sidebar">
   
     <section>
+  <h1>About Me</h1>
+  <p>I’m Arend-Jan Tetteroo, a web developer from the Netherlands.</p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/12/running-symfony2-on-the-php-5-dot-4-internal-webserver-and-assets-404/">Running Symfony2 on the Php 5.4 Internal Webserver and Assets 404</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/06/switching-from-bower-to-composer-with-components/">Switching From Bower to Composer With Components</a>

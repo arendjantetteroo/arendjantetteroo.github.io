@@ -13,12 +13,18 @@
         <lastmod>2013-11-06T14:57:09+01:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://arendjantetteroo.github.io/blog/2013/11/12/running-symfony2-on-the-php-5-dot-4-internal-webserver-and-assets-404/
+        </loc>
+        <lastmod>2013-11-12T09:22:04+01:00</lastmod>
+    </url>
+    <url>
         <loc>http://arendjantetteroo.github.io/robots.txt</loc>
         <lastmod>2013-06-14T17:15:36+02:00</lastmod>
     </url>
     <url>
         <loc>http://arendjantetteroo.github.io/blog/archives/</loc>
-        <lastmod>2013-11-06T14:57:09+01:00</lastmod>
+        <lastmod>2013-11-12T09:22:04+01:00</lastmod>
     </url>
     <url>
         <loc>http://arendjantetteroo.github.io/about/</loc>
@@ -26,6 +32,6 @@
     </url>
     <url>
         <loc>http://arendjantetteroo.github.io/</loc>
-        <lastmod>2013-11-06T14:57:09+01:00</lastmod>
+        <lastmod>2013-11-12T09:22:04+01:00</lastmod>
     </url>
 </urlset>
