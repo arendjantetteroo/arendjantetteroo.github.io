@@ -14,5 +14,5 @@ Main tools I use are : PHP, Symfony2, Silex.
 
 See my [LinkedIn](http://nl.linkedin.com/in/arendjantetteroo) profile for more information about projects and companies I've worked for.
 
-Checkout my kayking blog for my other great passion: [Whitewater and Surfkayking](http://blog.arendjantetteroo.nl)
+Checkout my kayking blog for my other great passion: [Whitewater and Surfkayaking](http://blog.arendjantetteroo.nl)
 
